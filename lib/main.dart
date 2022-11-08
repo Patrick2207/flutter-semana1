@@ -1,40 +1,28 @@
-// Importa as ferramentas do flutter.
 import 'package:flutter/material.dart';
 
-
-// Cria a aplicação.
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // Esta é a raiz da aplicação.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Minha Pgina',
       theme: ThemeData(
-      // Aqui e onde e criado o tema da aplicação.
-        
-        primarySwatch: Colors.blue,
+        // Aqui e onde e criado o tema da aplicação.
+        // E alteramos a cora da pagina.
+        primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Semana 2'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-// Este widget é a página inicial do seu aplicativo. É stateful, ou seja,
-//Tem um objeto State (definido abaixo) que contém os campos afetados.
-
-//Esta classe é a configuração do estado. ele mantém o valor.
-//corresponde ao título fornecido pelo pai (neste caso, o widget do aplicativo) e
-//Usado pelo método de construção do estado. Os campos na subclasse Widget são
-//Sempre marcado como "final.
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -47,8 +35,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-    // Esta etapa alerta sobre alterações e faz a atulaização.
+      // Esta etapa alerta sobre alterações e faz a atulaização.
       _counter++;
+    });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
     });
   }
 
@@ -67,8 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
           //Executa a formatação da pagina.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            //Texto que aparece na pagina central.
             const Text(
-              'You have pushed the button this many times:',
+              'Numero de paginas abertas:',
             ),
             Text(
               '$_counter',
@@ -77,11 +72,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // Esta vírgula à direita torna a formatação automática mais agradável para métodos de compilação.
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          //Add mais paginas.
+          FloatingActionButton(
+            onPressed: _incrementCounter,
+            tooltip: 'Increment',
+            child: const Icon(Icons.add),
+          ),
+          const SizedBox(
+            width: 10.0,
+          ),
+          //Remove as paginas abertas.
+          FloatingActionButton(
+            onPressed: _decrementCounter,
+            tooltip: 'Drecrement',
+            child: const Icon(Icons.remove),
+          ),
+        ],
+      ),
     );
   }
 }
